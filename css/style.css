@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body, html {
+    box-sizing: border-box;
+    height: 100%;
+    margin: 0;
+    font-family: 'Georgia', sans-serif;
+  }
+
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Set a high z-index to ensure it's above other content */
+  }
+
+  footer {
+    z-index: 1000;
+  }
+
+  .main_page {
+    text-align: center;
+    height: 100%;
+    background: url('../images/background.jpg') center/cover no-repeat;
+    padding-top: 50px;
+  }
+
+  .main_page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Adjust the overlay color and opacity as needed */
+  }
+
+  .content {
+    position: relative;
+    z-index: 1; /* Bring the content to the front */
+    color: #fff;
+    padding-top: 50px; /* Adjust the padding to push content below the sticky header */
+  }
+
+  .icon-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #212529;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none; /* Add this line to remove underlines from the link */
+    width: 200px; /* Set a fixed width for equal sizes */
+  }
+
+  .icon-box i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .icon-box:hover {
+    background-color: #495057;
+  }
+
+  /* Add the following styles for grid layout */
+  .login-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Adjust the gap as needed */
+  }
+
+  footer {
+    background-color: #212529;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
