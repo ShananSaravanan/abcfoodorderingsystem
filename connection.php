@@ -1,4 +1,9 @@
 <?php
+
+extension_loaded('mysqli') or die('MySQLi extension not loaded');
+echo 'MySQLi extension is loaded in CLI.';
+
+
 $servername = "localhost";
 $username = "root";
 $password = "";
