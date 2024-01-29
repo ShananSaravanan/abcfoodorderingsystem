@@ -41,19 +41,21 @@ include 'connection.php';
 </header>
 
 <!-- Register Form -->
-<form action="register_process.php" method="post">
+<form action="registration.php" method="post">
+<input type="hidden" name="redirect_page" value="login_chef.php">
+<input type="hidden" name="tablename" value="chef">
     <h2>Register</h2>
     <label for="reg_name">Name</label>
-    <input type="text" id="reg_name" name="reg_name" required>
+    <input type="text" class="form-control" name="registerName" id="registerName" required>
 
     <label for="reg_email">Email:</label>
-    <input type="email" id="reg_email" name="reg_email" required>
+    <input type="text" class="form-control" name="registerEmail" id="registerEmail" required>
 
     <label for="reg_password">Password:</label>
-    <input type="password" id="reg_password" name="reg_password" required>
+    <input type="text" class="form-control" name="registerPassword" id="registerPassword" required>
 
     <label for="reg_contact">Contact:</label>
-    <input type="text" id="reg_contact" name="reg_contact">
+    <input type="text" class="form-control" name="registerContact" id="registerContact" required>
 
     <button type="submit">Register</button>
 </form>
