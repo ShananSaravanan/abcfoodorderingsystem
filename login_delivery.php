@@ -47,17 +47,20 @@
 
                 <div class="tab-content mt-2">
                     <div class="tab-pane fade show active" id="login">
-                        <form>
-                            <div class="mb-3">
-                                <label for="loginEmail" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="loginEmail" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="loginPassword" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="loginPassword" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Login</button>
-                        </form>
+                    <form action="login.php" method="post">
+                        <input type="hidden" name="redirect_page" value="delivery_dashboard.php">
+                        <input type="hidden" name="from_page" value="login_delivery.php">
+                        <input type="hidden" name="tablename" value="deliverypersonnel">
+                  <div class="mb-3">
+                    <label for="loginEmail" class="form-label">Email address</label>
+                    <input type="email" class="form-control" name="loginEmail" id="loginEmail" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="loginPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="loginPassword" id="loginPassword" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Login</button>
+                </form>
                     </div>
                     <div class="tab-pane fade" id="register">
                         <form action="registration.php" method="post">

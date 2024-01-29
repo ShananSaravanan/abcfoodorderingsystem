@@ -39,23 +39,54 @@
             <ul class="nav nav-tabs" id="myTabs">
               <li class="nav-item">
                 <a class="nav-link active" id="login-tab" data-bs-toggle="tab" href="#login">Login</a>
+                
               </li>
+              <li class="nav-item">
+                        <a class="nav-link" id="register-tab" data-bs-toggle="tab" href="#register">Register</a>
+                    </li>
             </ul>
 
             <div class="tab-content mt-2">
               <div class="tab-pane fade show active" id="login">
-                <form>
+              <form action="login.php" method="post">
+                        <input type="hidden" name="redirect_page" value="chef_dashboard.php">
+                        <input type="hidden" name="from_page" value="login_chef.php">
+                        <input type="hidden" name="tablename" value="chef">
                   <div class="mb-3">
                     <label for="loginEmail" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="loginEmail" required>
+                    <input type="email" class="form-control" name="loginEmail" id="loginEmail" required>
                   </div>
                   <div class="mb-3">
                     <label for="loginPassword" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="loginPassword" required>
+                    <input type="password" class="form-control" name="loginPassword" id="loginPassword" required>
                   </div>
                   <button type="submit" class="btn btn-primary">Login</button>
                 </form>
               </div>
+              <div class="tab-pane fade" id="register">
+                        <form action="registration.php" method="post">
+                        <input type="hidden" name="redirect_page" value="login_chef.php">
+                        <input type="hidden" name="tablename" value="chef">
+                            <div class="mb-3">
+                                <label for="registerName" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" name="registerName" id="registerName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerEmail" class="form-label">Email address</label>
+                                <input type="email" class="form-control" name="registerEmail" id="registerEmail" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="registerEmail" class="form-label">Contact</label>
+                                <input type="text" class="form-control" name="registerContact" id="registerContact" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" name="registerPassword" id="registerPassword" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </form>
+                    </div>
             </div>
           </div>
         </div>
