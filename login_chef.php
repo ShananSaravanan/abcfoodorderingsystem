@@ -15,12 +15,8 @@
 <header class="p-3 bg-dark text-white">
   <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-      <ul class="nav nav-pills">
-        <li class="nav-item"><a href="/ABC System" class="nav-link text-white" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link text-white">About Us</a></li>
-        <li class="nav-item"><a href="#" class="nav-link text-white">Contact</a></li>
-      </ul>
-      <div class="chef-section ml-lg-3">
+    <?php include 'headermenus.php'; ?>
+    <div class="chef-section ml-lg-3">
         <ul class="nav">
           <li class="nav-item"><a href="#" class="nav-link text-white" style="border: 1px solid white;">CHEF</a></li>
         </ul>
@@ -39,11 +35,8 @@
             <ul class="nav nav-tabs" id="myTabs">
               <li class="nav-item">
                 <a class="nav-link active" id="login-tab" data-bs-toggle="tab" href="#login">Login</a>
-                
               </li>
-              <li class="nav-item">
-                        <a class="nav-link" id="register-tab" data-bs-toggle="tab" href="#register">Register</a>
-                    </li>
+              
             </ul>
 
             <div class="tab-content mt-2">
@@ -63,30 +56,7 @@
                   <button type="submit" class="btn btn-primary">Login</button>
                 </form>
               </div>
-              <div class="tab-pane fade" id="register">
-                        <form action="registration.php" method="post">
-                        <input type="hidden" name="redirect_page" value="login_chef.php">
-                        <input type="hidden" name="tablename" value="chef">
-                            <div class="mb-3">
-                                <label for="registerName" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" name="registerName" id="registerName" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="registerEmail" class="form-label">Email address</label>
-                                <input type="email" class="form-control" name="registerEmail" id="registerEmail" required>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="registerEmail" class="form-label">Contact</label>
-                                <input type="text" class="form-control" name="registerContact" id="registerContact" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="registerPassword" class="form-label">Password</label>
-                                <input type="password" class="form-control" name="registerPassword" id="registerPassword" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Register</button>
-                        </form>
-                    </div>
+              
             </div>
           </div>
         </div>

@@ -15,11 +15,7 @@
 <header class="p-3 bg-dark text-white">
   <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-    <ul class="nav nav-pills">
-        <li class="nav-item"><a href="/ABC System" class="nav-link text-white" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link text-white">About Us</a></li>
-        <li class="nav-item"><a href="#" class="nav-link text-white">Contact</a></li>
-      </ul>
+    <?php include 'headermenus.php'; ?>
       <div class="chef-section ml-lg-3">
           <ul class="nav">
             <li class="nav-item"><a href="#" class="nav-link text-white" style="border: 1px solid white;">CUSTOMER</a></li>
