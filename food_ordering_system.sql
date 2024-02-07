@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 29, 2024 at 09:08 PM
+-- Generation Time: Feb 07, 2024 at 10:18 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,16 +32,17 @@ CREATE TABLE `chef` (
   `Chef_Name` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `Chef_Contact` varchar(100) NOT NULL
+  `Chef_Contact` varchar(100) NOT NULL,
+  `vendor_id` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `chef`
 --
 
-INSERT INTO `chef` (`id`, `Chef_Name`, `email`, `password`, `Chef_Contact`) VALUES
-(4, 'Dreshya', 'shananmessi10@gmail.com', '$2y$10$YvjhPbplI3gv0FffcDkBS.gYwn7wBS.lIpDB3yiC5tSHoYWgtv5g.', '123'),
-(5, 'Shanan', 'shananmessi10@gmail.com', '$2y$10$nz2G/c.nmvQSqf84ETN54OO9yXyp9U69hma1IA.GUP.DQeSy/vCwC', '234');
+INSERT INTO `chef` (`id`, `Chef_Name`, `email`, `password`, `Chef_Contact`, `vendor_id`) VALUES
+(1, 'James Foo1', 'jamesfoo@yahoo.com', '123', '0198764312', 127),
+(7, 'Dre', 'dre@gmail.com', '$2y$10$OrCHF9ZIEySSUj78IPAsJei8ruur81ft8wpokwnB62idagejDambK', '123', 127);
 
 -- --------------------------------------------------------
 
@@ -74,10 +75,19 @@ INSERT INTO `customer` (`id`, `Cust_Name`, `email`, `password`, `Cust_contact`) 
 CREATE TABLE `customerorder` (
   `id` int(11) NOT NULL,
   `Customer_ID` int(100) NOT NULL,
-  `Order_Date` date NOT NULL,
+  `menu_id` int(11) NOT NULL,
+  `Order_Date` datetime NOT NULL,
   `Status` varchar(255) NOT NULL,
   `Chef_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `customerorder`
+--
+
+INSERT INTO `customerorder` (`id`, `Customer_ID`, `menu_id`, `Order_Date`, `Status`, `Chef_ID`) VALUES
+(1, 1, 20, '2024-02-09 02:09:00', 'Cancelled', 1),
+(2, 2, 20, '2024-02-17 02:09:00', 'Completed', 1);
 
 -- --------------------------------------------------------
 
@@ -88,11 +98,18 @@ CREATE TABLE `customerorder` (
 CREATE TABLE `deliveryhistory` (
   `id` int(11) NOT NULL,
   `Order_ID` int(11) NOT NULL,
-  `Delivery_Date` date NOT NULL,
+  `Delivery_Date` datetime NOT NULL,
   `Delivery_Status` varchar(255) NOT NULL,
-  `Delivery_Time` time NOT NULL,
   `Personnel_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `deliveryhistory`
+--
+
+INSERT INTO `deliveryhistory` (`id`, `Order_ID`, `Delivery_Date`, `Delivery_Status`, `Personnel_ID`) VALUES
+(1, 2, '2024-02-07 21:39:37', 'Delivered', 1),
+(2, 1, '2024-02-07 21:39:37', 'In-Transit', 1);
 
 -- --------------------------------------------------------
 
@@ -138,18 +155,20 @@ CREATE TABLE `menu` (
   `id` int(11) NOT NULL,
   `vendor_id` int(100) NOT NULL,
   `Item_Name` varchar(255) NOT NULL,
-  `Description` varchar(255) NOT NULL,
-  `Price` float(5,2) NOT NULL
+  `Item_Description` varchar(255) NOT NULL,
+  `Price` float(5,2) NOT NULL,
+  `menu_img` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `menu`
 --
 
-INSERT INTO `menu` (`id`, `vendor_id`, `Item_Name`, `Description`, `Price`) VALUES
-(2, 127, 'Nasi Lemak Curry Udang', 'Yes yes', 9.50),
-(4, 127, 'Nasi Lemak Ayam', 'Delicious Food', 1.50),
-(5, 127, 'Nasi Lemak Ayam', 'Delicious Food', 1.50);
+INSERT INTO `menu` (`id`, `vendor_id`, `Item_Name`, `Item_Description`, `Price`, `menu_img`) VALUES
+(19, 127, 'Nasi Goreng Kampung', 'Basic Nasi Goreng with more anchovies and kampung paste', 7.50, 'images/nasigoreng.jpg'),
+(20, 127, 'Nasi Ayam Legend', 'Chicken rice with leg piece and extra garlic sambal sauce', 5.00, 'images/Nasi_Ayam_Legend_6_Juta_Views.jpg'),
+(21, 127, 'Nasi Briyani Pakistan', 'Pakistan Style briyani rice with a fusion between Indian and Arabic style chicken', 12.00, 'images/Nasi_Briyani_Pakistan_IG.jpg'),
+(22, 127, 'Nasi Lemak Biasa', 'Basic Nasi Lemak', 3.00, 'images/nasilemak.jpg');
 
 -- --------------------------------------------------------
 
@@ -184,7 +203,8 @@ INSERT INTO `vendor` (`id`, `Vendor_Name`, `email`, `password`, `Vendor_Contact`
 -- Indexes for table `chef`
 --
 ALTER TABLE `chef`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `chef_vendor` (`vendor_id`);
 
 --
 -- Indexes for table `customer`
@@ -198,7 +218,8 @@ ALTER TABLE `customer`
 ALTER TABLE `customerorder`
   ADD PRIMARY KEY (`id`),
   ADD KEY `Chef_ID` (`Chef_ID`),
-  ADD KEY `Customer_ID` (`Customer_ID`);
+  ADD KEY `Customer_ID` (`Customer_ID`),
+  ADD KEY `menu_order` (`menu_id`);
 
 --
 -- Indexes for table `deliveryhistory`
@@ -241,7 +262,7 @@ ALTER TABLE `vendor`
 -- AUTO_INCREMENT for table `chef`
 --
 ALTER TABLE `chef`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -253,13 +274,13 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `customerorder`
 --
 ALTER TABLE `customerorder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `deliveryhistory`
 --
 ALTER TABLE `deliveryhistory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `deliverypersonnel`
@@ -277,7 +298,7 @@ ALTER TABLE `inventorymanagement`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `vendor`
@@ -290,11 +311,18 @@ ALTER TABLE `vendor`
 --
 
 --
+-- Constraints for table `chef`
+--
+ALTER TABLE `chef`
+  ADD CONSTRAINT `chef_vendor` FOREIGN KEY (`vendor_id`) REFERENCES `vendor` (`id`);
+
+--
 -- Constraints for table `customerorder`
 --
 ALTER TABLE `customerorder`
   ADD CONSTRAINT `chef_chefID` FOREIGN KEY (`Chef_ID`) REFERENCES `chef` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `customer_customerid` FOREIGN KEY (`Customer_ID`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `customer_customerid` FOREIGN KEY (`Customer_ID`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `menu_order` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`);
 
 --
 -- Constraints for table `deliveryhistory`
