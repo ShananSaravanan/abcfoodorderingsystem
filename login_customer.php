@@ -44,7 +44,7 @@
                 <div class="tab-content mt-2">
                     <div class="tab-pane fade show active" id="login">
                         <form action="login.php" method="post">
-                        <input type="hidden" name="redirect_page" value="customer_dashboard.php">
+                        <input type="hidden" name="redirect_page" value="customer_mainpage.php">
                         <input type="hidden" name="from_page" value="login_customer.php">
                         <input type="hidden" name="tablename" value="customer">
                             <div class="mb-3">

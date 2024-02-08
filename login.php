@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $row = $result->fetch_assoc();
             if (password_verify($password, $row['password'])) {
                 // Password is correct, login successful
-                $_SESSION['vendor_id'] = $row['id']; // Store the vendor ID in a session variable
+                $_SESSION['id'] = $row['id']; // Store the vendor ID in a session variable
                 echo "<script>alert('Login successful!'); window.location.href='$page';</script>";
             } else {
                 // Incorrect password

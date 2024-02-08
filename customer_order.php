@@ -4,12 +4,12 @@ session_start(); // Start the session
 include 'connection.php';
 
 // Check if the vendor is logged in
-if (!isset($_SESSION['vendor_id'])) {
+if (!isset($_SESSION['id'])) {
     header('Location: login_vendor.php'); // Redirect to login page if not logged in
     exit();
 }
 
-$vendor_id = $_SESSION['vendor_id'];
+$vendor_id = $_SESSION['id'];
 $result = $conn->query("SELECT * FROM menu WHERE vendor_id = $vendor_id");
 
 // Fetch vendor details (optional)
@@ -23,7 +23,7 @@ $statusQuery = $conn->query("SELECT DISTINCT Status FROM customerorder co
 
 // Fetch customer orders with necessary joins and vendor_id condition
 $orderQuery = $conn->query("
-    SELECT co.id AS order_id, co.Order_Date, co.Status,
+    SELECT co.id AS order_id, co.Order_Date, co.Status,co.deliveryaddress
            c.id AS customer_id, c.Cust_Name, c.Cust_Contact,c.email AS Customer_Email,
            ch.id AS chef_id, ch.Chef_Name, ch.email AS Chef_Email,
            m.Item_Name
@@ -162,6 +162,7 @@ $orders = $orderQuery->fetch_all(MYSQLI_ASSOC);
                 <strong>Chef ID:</strong> <?php echo $order['chef_id']; ?><br>
                 <strong>Chef Name:</strong> <?php echo $order['Chef_Name']; ?><br>
                 <strong>Chef Email:</strong> <?php echo $order['Chef_Email']; ?><br>
+                <strong>Delivery Address:</strong> <?php echo $order['deliveryaddress']; ?><br>
             </div>
         </td>
     </tr>
