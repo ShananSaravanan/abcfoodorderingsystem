@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 07, 2024 at 10:18 PM
+-- Generation Time: Feb 09, 2024 at 09:35 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,8 +41,8 @@ CREATE TABLE `chef` (
 --
 
 INSERT INTO `chef` (`id`, `Chef_Name`, `email`, `password`, `Chef_Contact`, `vendor_id`) VALUES
-(1, 'James Foo1', 'jamesfoo@yahoo.com', '123', '0198764312', 127),
-(7, 'Dre', 'dre@gmail.com', '$2y$10$OrCHF9ZIEySSUj78IPAsJei8ruur81ft8wpokwnB62idagejDambK', '123', 127);
+(1, 'James Foo1', 'jamesfoo@yahoo.com', '$2y$10$A6owIHo7Z83RuobbCIcBeu4VpqlbmMgNvUvsjjyZFPJ6bO8iuiA1i', '0198764312', 127),
+(7, 'Dre', '123@gmail.com', '123', '123111', 127);
 
 -- --------------------------------------------------------
 
@@ -55,16 +55,17 @@ CREATE TABLE `customer` (
   `Cust_Name` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `Cust_contact` varchar(255) NOT NULL
+  `Cust_contact` varchar(255) NOT NULL,
+  `personaladdress` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`id`, `Cust_Name`, `email`, `password`, `Cust_contact`) VALUES
-(1, 'Wesh', 'wesh@gmail.com', '$2y$10$ClqsRa4Vt2AFqx9PG4gpuOvn9R.VGOyDAa4rWqR2..j67Sc.Tzksq', '231@gmail.com'),
-(2, 'Shanan Saravanan', 'shananmessi10@gmail.com', '$2y$10$8JwUlf0gUqub9FeHDots8OpOebzrEwW..d61JQNKXc7wtQIjq/x5S', '0198765421');
+INSERT INTO `customer` (`id`, `Cust_Name`, `email`, `password`, `Cust_contact`, `personaladdress`) VALUES
+(1, 'Wesh', 'wesh@gmail.com', '$2y$10$ClqsRa4Vt2AFqx9PG4gpuOvn9R.VGOyDAa4rWqR2..j67Sc.Tzksq', '231@gmail.com', ''),
+(2, 'Shanan Saravanan', 'shananmessi10@gmail.com', '$2y$10$8JwUlf0gUqub9FeHDots8OpOebzrEwW..d61JQNKXc7wtQIjq/x5S', '0198765421', 'No.37,Lorong Bukit Minyak 25');
 
 -- --------------------------------------------------------
 
@@ -76,18 +77,22 @@ CREATE TABLE `customerorder` (
   `id` int(11) NOT NULL,
   `Customer_ID` int(100) NOT NULL,
   `menu_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
   `Order_Date` datetime NOT NULL,
-  `Status` varchar(255) NOT NULL,
-  `Chef_ID` int(11) DEFAULT NULL
+  `Order_Status` varchar(255) NOT NULL,
+  `Chef_ID` int(11) DEFAULT NULL,
+  `deliveryaddress` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customerorder`
 --
 
-INSERT INTO `customerorder` (`id`, `Customer_ID`, `menu_id`, `Order_Date`, `Status`, `Chef_ID`) VALUES
-(1, 1, 20, '2024-02-09 02:09:00', 'Cancelled', 1),
-(2, 2, 20, '2024-02-17 02:09:00', 'Completed', 1);
+INSERT INTO `customerorder` (`id`, `Customer_ID`, `menu_id`, `quantity`, `Order_Date`, `Order_Status`, `Chef_ID`, `deliveryaddress`) VALUES
+(1, 1, 20, 0, '2024-02-09 02:09:00', 'Cancelled', 1, ''),
+(2, 2, 20, 0, '2024-02-17 02:09:00', 'Cancelled', 1, ''),
+(17, 2, 21, 0, '2024-02-08 20:07:43', 'Completed', 1, 'Delivery Address: No.37,Lorong Bukit Minyak 25'),
+(18, 2, 21, 1, '2024-02-08 20:08:49', 'Out-For-Delivery', 7, 'Delivery Address: No.37,Lorong Bukit Minyak 25');
 
 -- --------------------------------------------------------
 
@@ -109,7 +114,8 @@ CREATE TABLE `deliveryhistory` (
 
 INSERT INTO `deliveryhistory` (`id`, `Order_ID`, `Delivery_Date`, `Delivery_Status`, `Personnel_ID`) VALUES
 (1, 2, '2024-02-07 21:39:37', 'Delivered', 1),
-(2, 1, '2024-02-07 21:39:37', 'In-Transit', 1);
+(2, 1, '2024-02-07 21:39:37', 'In-Transit', 1),
+(3, 17, '2024-02-07 21:39:37', 'In-Transit', 1);
 
 -- --------------------------------------------------------
 
@@ -168,7 +174,9 @@ INSERT INTO `menu` (`id`, `vendor_id`, `Item_Name`, `Item_Description`, `Price`,
 (19, 127, 'Nasi Goreng Kampung', 'Basic Nasi Goreng with more anchovies and kampung paste', 7.50, 'images/nasigoreng.jpg'),
 (20, 127, 'Nasi Ayam Legend', 'Chicken rice with leg piece and extra garlic sambal sauce', 5.00, 'images/Nasi_Ayam_Legend_6_Juta_Views.jpg'),
 (21, 127, 'Nasi Briyani Pakistan', 'Pakistan Style briyani rice with a fusion between Indian and Arabic style chicken', 12.00, 'images/Nasi_Briyani_Pakistan_IG.jpg'),
-(22, 127, 'Nasi Lemak Biasa', 'Basic Nasi Lemak', 3.00, 'images/nasilemak.jpg');
+(22, 127, 'Nasi Lemak Biasa', 'Basic Nasi Lemak', 3.00, 'images/nasilemak.jpg'),
+(25, 123, 'Nasi Lemak Biasa', 'Basic Nasi Lemak', 3.00, 'images/nasilemak.jpg'),
+(26, 123, 'Nasi Lemak Ayam', 'Basic Nasi Lemak with ayam\r\n', 3.00, 'images/nasilemak.jpg');
 
 -- --------------------------------------------------------
 
@@ -181,19 +189,20 @@ CREATE TABLE `vendor` (
   `Vendor_Name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `Vendor_Contact` varchar(100) NOT NULL
+  `Vendor_Contact` varchar(100) NOT NULL,
+  `Vendor_Address` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `vendor`
 --
 
-INSERT INTO `vendor` (`id`, `Vendor_Name`, `email`, `password`, `Vendor_Contact`) VALUES
-(123, '123@gmail.com', '$2y$10$nqtsljayhd31BLcYwhU1xeRp/HnbBQmowEjr/cJTMNNwPQikwr5Q.', '123', ''),
-(124, '123@gmail.com', '$2y$10$HmTZFLRwuxXsm.cbZ1oNQOVc.YIFlKstH.HyBYQ3iAJ7oPFDuVkMy', '123', ''),
-(125, '123@gmail.com', '$2y$10$UxqTckHP7X5vX3HRmJEjuOhP0cJ6bF.nBm3ccBBomBIwpo44YQvPG', '123', ''),
-(126, '123', '123@gmail.com', '$2y$10$xFd5ipNKzeJESaICvHh5FujQWVXwtBS0.FiGaoXp4FWJX5OMF39jq', '231'),
-(127, 'Shanan', 'shananmessi10@gmail.com', '$2y$10$okMMNgFHV1Q.biBesq.MMOLnxMJNC.uO0EpbBzOFRDnzR8ry8nqxK', '+60174610143');
+INSERT INTO `vendor` (`id`, `Vendor_Name`, `email`, `password`, `Vendor_Contact`, `Vendor_Address`) VALUES
+(123, '123@gmail.com', '$2y$10$nqtsljayhd31BLcYwhU1xeRp/HnbBQmowEjr/cJTMNNwPQikwr5Q.', '123', '0198765321', 'No.37,Lorong Bukit Minyak 25, Taman Bukit Minyak Indah, 14000, Bandar Perda, Pulau Pinang'),
+(124, '123@gmail.com', '$2y$10$HmTZFLRwuxXsm.cbZ1oNQOVc.YIFlKstH.HyBYQ3iAJ7oPFDuVkMy', '123', '1234444', 'No.27,Lorong Bukit Minyak 20, Taman Bukit Minyak Indah, 14000, Bandar Perda, Pulau Pinang'),
+(125, '123@gmail.com', '$2y$10$UxqTckHP7X5vX3HRmJEjuOhP0cJ6bF.nBm3ccBBomBIwpo44YQvPG', '123', '', 'No.37,Lorong Bukit Minyak 25, Taman Bukit Minyak Indah, 14000, Bukit Mertajam, Pulau Pinang'),
+(126, '123', '123@gmail.com', '$2y$10$xFd5ipNKzeJESaICvHh5FujQWVXwtBS0.FiGaoXp4FWJX5OMF39jq', '231', 'No.37,Lorong Bukit Minyak 25, Taman Bukit Minyak Indah, 14000, Bukit Mertajam, Pulau Pinang'),
+(127, 'Shanan', 'shananmessi10@gmail.com', '$2y$10$okMMNgFHV1Q.biBesq.MMOLnxMJNC.uO0EpbBzOFRDnzR8ry8nqxK', '+60174610143', 'No.37,Lorong Bukit Minyak 25, Taman Bukit Minyak Indah, 14000, Bukit Mertajam, Pulau Pinang');
 
 --
 -- Indexes for dumped tables
@@ -274,13 +283,13 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `customerorder`
 --
 ALTER TABLE `customerorder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `deliveryhistory`
 --
 ALTER TABLE `deliveryhistory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `deliverypersonnel`
@@ -298,7 +307,7 @@ ALTER TABLE `inventorymanagement`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `vendor`
