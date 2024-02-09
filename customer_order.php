@@ -17,13 +17,13 @@ $vendor_result = $conn->query("SELECT * FROM vendor WHERE id = $vendor_id");
 $vendor_row = $vendor_result->fetch_assoc();
 $vendor_name = $vendor_row['Vendor_Name'];
 // Fetch distinct order statuses for dropdown
-$statusQuery = $conn->query("SELECT DISTINCT Status FROM customerorder co
+$statusQuery = $conn->query("SELECT DISTINCT Order_Status FROM customerorder co
                              JOIN menu m ON co.menu_id = m.id
                              WHERE m.vendor_id = $vendor_id");
 
 // Fetch customer orders with necessary joins and vendor_id condition
 $orderQuery = $conn->query("
-    SELECT co.id AS order_id, co.Order_Date, co.Status,co.deliveryaddress
+    SELECT co.id AS order_id, co.Order_Date, co.Order_Status,co.deliveryaddress,
            c.id AS customer_id, c.Cust_Name, c.Cust_Contact,c.email AS Customer_Email,
            ch.id AS chef_id, ch.Chef_Name, ch.email AS Chef_Email,
            m.Item_Name
@@ -145,7 +145,7 @@ $orders = $orderQuery->fetch_all(MYSQLI_ASSOC);
         <td><?php echo $order['Item_Name']; ?></td>
         <td><?php echo $order['Cust_Name']; ?></td>
         <td><?php echo date('d-m-Y H:i:s', strtotime($order['Order_Date'])); ?></td>
-        <td class="<?php echo getStatusClass($order['Status']); ?>"><?php echo $order['Status']; ?></td>
+        <td class="<?php echo getStatusClass($order['Order_Status']); ?>"><?php echo $order['Order_Status']; ?></td>
         <td>
             <button class="btn btn-light btn-sm show-details-btn" data-order-id="<?php echo $order['order_id']; ?>">
                 <i class="fa-solid fa-toggle-off"></i>

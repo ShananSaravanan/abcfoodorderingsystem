@@ -131,6 +131,7 @@ $vendor_name = $vendor_row['Vendor_Name'];
                             <th>ID</th>
                             <th>Chef Name</th>
                             <th>Email</th>
+                            <th>Password</th>
                             <th>Contact</th>
                             <th>Action</th>
                         </tr>
@@ -141,6 +142,7 @@ $vendor_name = $vendor_row['Vendor_Name'];
                                 <td><?php echo $chef_row['id']; ?></td>
                                 <td><?php echo $chef_row['Chef_Name']; ?></td>
                                 <td><?php echo $chef_row['email']; ?></td>
+                                <td><?php echo $chef_row['password']; ?></td>
                                 <td><?php echo $chef_row['Chef_Contact']; ?></td>
                                 <td>
                                     <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editChefModal<?php echo $chef_row['id']; ?>"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
@@ -168,6 +170,10 @@ $vendor_name = $vendor_row['Vendor_Name'];
                                                 <div class="form-group">
                                                     <label for="editChefEmail">Email</label>
                                                     <input type="email" name="editChefEmail" class="form-control" id="editChefEmail" value="<?php echo $chef_row['email']; ?>" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="editChefPassword">Password</label>
+                                                    <input type="text" name="editChefPassword" class="form-control" id="editChefPassword" value="<?php echo $chef_row['password']; ?>" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="editChefContact">Contact</label>

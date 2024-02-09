@@ -3,12 +3,12 @@ session_start();
 
 include 'connection.php';
 
-if (!isset($_SESSION['vendor_id'])) {
+if (!isset($_SESSION['id'])) {
     header('Location: login_vendor.php');
     exit();
 }
 
-$vendor_id = $_SESSION['vendor_id'];
+$vendor_id = $_SESSION['id'];
 $result = $conn->query("SELECT * FROM menu WHERE vendor_id = $vendor_id");
 
 $vendor_result = $conn->query("SELECT * FROM vendor WHERE id = $vendor_id");
