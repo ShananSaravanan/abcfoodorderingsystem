@@ -7,7 +7,7 @@ if (!isset($_SESSION['id'])) {
     header('Location: login_chef.php'); // Redirect to login page if not logged in or not a chef
     exit();
 }
-
+$_SESSION['nav'] = "chefnav.php";
 $chef_id = $_SESSION['id'];
 
 // Fetch ongoing orders for the chef

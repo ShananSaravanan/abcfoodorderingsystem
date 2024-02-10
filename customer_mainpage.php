@@ -5,7 +5,7 @@ if (!isset($_SESSION['id'])) {
     header('Location: login_customer.php'); // Redirect to login page if not logged in
     exit();
 }
-
+$_SESSION['nav'] = "customernav.php";
 $customer_id = $_SESSION['id'];
 
 $sql = "SELECT m.id, m.Item_Name, m.Item_Description, m.Price, m.menu_img, v.Vendor_Name, v.Vendor_Address

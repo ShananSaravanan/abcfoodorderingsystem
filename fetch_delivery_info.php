@@ -7,7 +7,7 @@ if (!isset($_POST['order_id'])) {
     echo 'Invalid request';
     exit();
 }
-
+try{
 $order_id = $_POST['order_id'];
 
 // Fetch delivery information from delivery_history
@@ -19,9 +19,9 @@ $sql = "SELECT dh.Order_ID, dh.Delivery_Date, dp.Personnel_Name, dp.Contact_Info
 $result = $conn->query($sql);
 
 // Check if the query was successful
-if ($result) {
+if ($result && $result->num_rows > 0) {
     $deliveryInfo = $result->fetch_assoc();
-
+    
     // Display the fetched data in a formatted way (you can customize this based on your needs)
     echo '
           <div class="modal-body">
@@ -32,6 +32,10 @@ if ($result) {
             <p><strong>Delivery Vehicle Information:</strong> ' . $deliveryInfo['Delivery_VehicleInformation'] . '</p>
           </div>';
 } else {
+    echo 'No delivery personnel have accepted this order yet';
+}
+}
+catch (Exception $e) {
     echo 'Error fetching delivery information';
 }
 

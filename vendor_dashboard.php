@@ -18,6 +18,8 @@ $result = $conn->query("SELECT * FROM menu WHERE vendor_id = $vendor_id");
 $vendor_result = $conn->query("SELECT * FROM vendor WHERE id = $vendor_id");
 $vendor_row = $vendor_result->fetch_assoc();
 $vendor_name = $vendor_row['Vendor_Name'];
+
+$_SESSION['nav'] = "vendornav.php";
 ?>
 
 <!DOCTYPE html>

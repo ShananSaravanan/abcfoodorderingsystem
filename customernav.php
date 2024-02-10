@@ -24,8 +24,9 @@ $customername = $row['Cust_Name'];
                 <li class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'orderhistory.php' ? 'active' : ''; ?>">
                     <a class="nav-link" href="orderhistory.php">Orders</a>
                 </li>
-                <li class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'customer_account.php' ? 'active' : ''; ?>">
-                    <a class="nav-link" href="customer_account.php">Account Information</a>
+                <li class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'accountinfo.php' ? 'active' : ''; ?>">
+                
+                    <a class="nav-link" href="accountinfo.php"><i class="fa-regular fa-user"></i> Account Information</a>
                 </li>
                 <li class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'customercart.php' ? 'active' : ''; ?>">
                     <a class="nav-link" href="customercart.php"><i class="fa-solid fa-cart-shopping"></i> Your Cart</a>
