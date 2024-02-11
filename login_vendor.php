@@ -78,6 +78,10 @@
                                 <label for="registerPassword" class="form-label">Password</label>
                                 <input type="password" class="form-control" name="registerPassword" id="registerPassword" required>
                             </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Vendor Address</label>
+                                <textarea class="form-control" name="address" id="address" required></textarea>
+                            </div>
                             <button type="submit" class="btn btn-primary">Register</button>
                         </form>
                     </div>

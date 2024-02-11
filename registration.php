@@ -10,7 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = password_hash($_POST["registerPassword"], PASSWORD_DEFAULT);
         $contact = isset($_POST['registerContact']) ? $_POST['registerContact'] : 'empty';
         $vehicleinfo = isset($_POST['vehicleinfo']) ? $_POST['vehicleinfo'] : 'empty';
-        
+        $address = isset($_POST['address']) ? $_POST['address'] : 'empty';
+
         // Get column names from the table excluding 'id'
         $result = $conn->query("DESCRIBE $table");
         $columns = [];
@@ -38,6 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         if ($vehicleinfo != "empty") {
             $sql .= ", '$vehicleinfo'";
+        }
+        if ($address != "empty") {
+            $sql .= ", '$address'";
         }
 
         $sql .= ")";
