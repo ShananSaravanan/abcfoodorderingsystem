@@ -4,13 +4,13 @@ session_start(); // Start the session
 include 'connection.php';
 
 // Check if the vendor is logged in
-if (!isset($_SESSION['vendor_id'])) {
+if (!isset($_SESSION['id'])) {
     header('Location: login_vendor.php'); // Redirect to login page if not logged in
     exit();
 }
 
 // Get vendor ID from the session
-$vendor_id = $_SESSION['vendor_id'];
+$vendor_id = $_SESSION['id'];
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

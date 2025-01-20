@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['newChefEmail'];
     $password = password_hash($_POST['newChefPassword'], PASSWORD_DEFAULT);
     $contact = $_POST['newChefContact'];
-    $vendorId = $_SESSION['vendor_id'];
+    $vendorId = $_SESSION['id'];
 
     // Insert data into the chef table
     $query = "INSERT INTO chef (Chef_Name, email, password, Chef_Contact, vendor_id) VALUES ('$chefName', '$email', '$password', '$contact', '$vendorId')";

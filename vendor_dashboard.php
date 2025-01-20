@@ -8,12 +8,16 @@ if (!isset($_SESSION['id'])) {
     header('Location: login_vendor.php'); // Redirect to login page if not logged in
     exit();
 }
-
 $vendor_id = $_SESSION['id'];
 
 // Fetch menus for the logged-in vendor
-$result = $conn->query("SELECT * FROM menu WHERE vendor_id = $vendor_id");
-
+$menu_result = $conn->query("SELECT * FROM menu WHERE vendor_id = $vendor_id");
+if ($menu_result) {
+    $data = $menu_result->fetch_all(MYSQLI_ASSOC); // Fetch all rows as an associative array
+    echo "<script>console.log('Query Result: " . json_encode($data) . "');</script>";
+} else {
+    echo "<script>console.log('Query Error: " . $conn->error . "');</script>";
+}
 // Fetch vendor details (optional)
 $vendor_result = $conn->query("SELECT * FROM vendor WHERE id = $vendor_id");
 $vendor_row = $vendor_result->fetch_assoc();
@@ -142,9 +146,8 @@ $_SESSION['nav'] = "vendornav.php";
 
 
         <div class="row">
-
-
-            <?php while ($menu_row = $result->fetch_assoc()) : ?>
+            
+            <?php $menu_result->data_seek(0);  while ($menu_row = $menu_result->fetch_assoc()) : ?>
                 <!-- Menu Card -->
                 <div class="col-md-4 mb-4 menu-card">
                     <div class="card position-relative">
@@ -235,7 +238,7 @@ $_SESSION['nav'] = "vendornav.php";
                         </div>
                         <div class="modal-body">
                             <!-- Add form elements for adding a new menu -->
-                            <form action="addmenu.php" method="post" enctype="multipart/form-data">
+                            <form action="addmenu.php" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="newItemName">Item Name</label>
                                     <input type="text" name="newItemName" class="form-control" id="newItemName" required>

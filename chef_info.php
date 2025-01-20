@@ -12,7 +12,7 @@ if (!isset($_SESSION['id'])) {
 $vendor_id = $_SESSION['id'];
 
 // Fetch chefs for the logged-in vendor
-$result = $conn->query("SELECT * FROM chef WHERE vendor_id = $vendor_id");
+$chef_result = $conn->query("SELECT * FROM chef WHERE vendor_id = $vendor_id");
 $vendor_result = $conn->query("SELECT * FROM vendor WHERE id = $vendor_id");
 $vendor_row = $vendor_result->fetch_assoc();
 $vendor_name = $vendor_row['Vendor_Name'];
@@ -137,7 +137,7 @@ $vendor_name = $vendor_row['Vendor_Name'];
                         </tr>
                     </thead>
                     <tbody id="chefTableBody">
-                        <?php while ($chef_row = $result->fetch_assoc()) : ?>
+                        <?php $chef_result->data_seek(0); while ($chef_row = $chef_result->fetch_assoc()) : ?>
                             <tr>
                                 <td><?php echo $chef_row['id']; ?></td>
                                 <td><?php echo $chef_row['Chef_Name']; ?></td>

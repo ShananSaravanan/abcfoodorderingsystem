@@ -1,3 +1,3 @@
 <footer>
-    Copyright &copy; 2024 Waffle Division. All Rights Reserved. Website managed by Waffle Division.
+    Copyright &copy; 2025 Developed for FYP Purposes
 </footer>
